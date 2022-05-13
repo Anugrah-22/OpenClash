@@ -1,0 +1,178 @@
+# UPLOAD BY ANUGRAH
+port: 7890
+socks-port: 7891
+mixed-port: 10809
+mode: global
+log-level: silent
+allow-lan: true
+external-controller: 0.0.0.0:9090
+secret : ""
+bind-address: "*"
+external-ui: yacd-gh-pages
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: redir-host
+  listen: 127.0.0.1:7894
+  use-hosts: true
+  nameserver:
+    - https://cloudflare-dns.com/dns-query
+    - 1.1.1.1
+  fallback:
+    - https://dns.google/dns-query
+#vmess   
+proxies:
+  - name: vmess1
+    server: 104.18.21.219
+    port: 443
+    type: vmess
+    uuid: afef92d5-b5b9-46aa-a982-3914fe62c1c5
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: id5.v2-ray.com
+    network: ws
+    ws-opts:
+      path: /fastssh/aryablitarne/627af7ddc069e/
+      headers:
+        Host: id5.v2-ray.com
+    udp: true
+  - name: vmess2
+    server: 104.18.21.219
+    port: 443
+    type: vmess
+    uuid: afef92d5-b5b9-46aa-a982-3914fe62c1c5
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: id5.v2-ray.com
+    network: ws
+    ws-opts:
+      path: /fastssh/aryablitarne/627af7ddc069e/
+      headers:
+        Host: id5.v2-ray.com
+    udp: true
+#VmessGrpc
+  - name: vmessGrpc1
+    server: cdntest40.line-scdn.net
+    port: 443
+    type: vmess
+    uuid: 5e5e92eb-f92a-4083-ba60-0f9de9518ce0
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sg1grpc.serverssh.us
+    network: grpc
+    grpc-opts:
+      grpc-service-name: grpc
+    udp: true
+  - name: vmessGrpc2
+    server: cdntest40.line-scdn.net
+    port: 443
+    type: vmess
+    uuid: 5e5e92eb-f92a-4083-ba60-0f9de9518ce0
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sg1grpc.serverssh.us
+    network: grpc
+    grpc-opts:
+      grpc-service-name: grpc
+    udp: true
+#TrojanGo
+  - name: TrojanGo1
+    server: cdntest40.line-scdn.net
+    port: 443
+    type: trojan
+    password: 7b4986c0-d0bb-11ec-af18-1239d0255272
+    skip-cert-verify: true
+    sni: id2-trojan.bonds.id
+    network: ws
+    ws-opts:
+      path: /howdy
+      headers:
+        Host: id2-trojan.bonds.id
+    udp: true
+  - name: TrojanGo2
+    server: cdntest40.line-scdn.net
+    port: 443
+    type: trojan
+    password: 7b4986c0-d0bb-11ec-af18-1239d0255272
+    skip-cert-verify: true
+    sni: id2-trojan.bonds.id
+    network: ws
+    ws-opts:
+      path: /howdy
+      headers:
+        Host: id2-trojan.bonds.id
+    udp: true
+#TrojanGrc
+  - name: TrojanGrpc1
+    server: cdntest40.line-scdn.net
+    port: 8443
+    type: trojan
+    password: dd3def95-3d3b-46d6-b988-65193fd20cc2
+    skip-cert-verify: true
+    sni: do7.kitu.xyz
+    network: grpc
+    grpc-opts:
+      grpc-service-name: xray-trojan-grpc
+    udp: true
+  - name: TrojanGrpc2
+    server: cdntest40.line-scdn.net
+    port: 8443
+    type: trojan
+    password: dd3def95-3d3b-46d6-b988-65193fd20cc2
+    skip-cert-verify: true
+    sni: do7.kitu.xyz
+    network: grpc
+    grpc-opts:
+      grpc-service-name: xray-trojan-grpc
+    udp: true
+#Trojan-ssl
+  - name: Trojan-Ssl1
+    server: 103.93.59.208
+    port: 443
+    type: trojan
+    password: 742f9630-d0bc-11ec-b8c1-1239d0255272
+    skip-cert-verify: true
+    sni: pubgmobile.com
+    udp: true
+  - name: Trojan-Ssl2
+    server: 103.93.59.208
+    port: 443
+    type: trojan
+    password: 742f9630-d0bc-11ec-b8c1-1239d0255272
+    skip-cert-verify: true
+    sni: pubgmobile.com
+    udp: true
+#SadowsoksSsr
+  - name: Shadowsocks1
+    server: 51.79.173.62
+    port: 1443
+    type: ss
+    cipher: aes-256-cfb
+    password: m6j4O4cGc5
+    plugin: obfs
+    plugin-opts:
+      mode: tls
+      host: pubgmobile.com
+    udp: true
+  - name: Shadowsocks2
+    server: 51.79.173.62
+    port: 1443
+    type: ss
+    cipher: aes-256-cfb
+    password: m6j4O4cGc5
+    plugin: obfs
+    plugin-opts:
+      mode: tls
+      host: pubgmobile.com
+    udp: true
+proxy-groups:
+
+#Start Coy...
