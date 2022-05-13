@@ -34,7 +34,7 @@ proxies:
         Host: idtj-uninet.bonds.id
     udp: true
   - name: BUG LINE
-    server: ruangguru.com
+    server: 104.21.71.112
     port: 443
     type: trojan
     password: 5083cde0-d28c-11ec-9672-1239d0255272
