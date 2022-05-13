@@ -21,7 +21,7 @@ dns:
     - https://dns.google/dns-query
 proxies:
   - name: BUG GRAB
-    server: zendesk1.grab.com
+    server: 104.18.72.113
     port: 443
     type: trojan
     password: e3f52fb0-d27f-11ec-8833-1239d0255272
@@ -34,7 +34,7 @@ proxies:
         Host: idtj-uninet.bonds.id
     udp: true
   - name: BUG LINE
-    server: cdntest40.line-scdn.net
+    server: ruangguru.com
     port: 443
     type: trojan
     password: 5083cde0-d28c-11ec-9672-1239d0255272
