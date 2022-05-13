@@ -1,58 +1,94 @@
-port: 7890
-socks-port: 7891
-mixed-port: 10809
-mode: global
-log-level: silent
-allow-lan: true
-external-controller: 0.0.0.0:9090
-secret : ""
+tproxy-port: 7893
 bind-address: "*"
+mode: rule
+allow-lan: true
+log-level: silent
+external-controller: 0.0.0.0:9090
 external-ui: yacd-gh-pages
+unified-delay: true
+ipv6: false
 dns:
   enable: true
   ipv6: false
-  enhanced-mode: redir-host
-  listen: 127.0.0.1:7894
+  listen: 0.0.0.0:1053
+  enhanced-mode: fake-ip
+  fake-ip-range: 28.0.0.0/8
   use-hosts: true
   nameserver:
     - https://cloudflare-dns.com/dns-query
-    - 1.1.1.1
-  fallback:
-    - https://dns.google/dns-query
 proxies:
-  - name: BUG GRAB
-    server: 104.18.72.113
+  - name: sg1 443
+    server: ruangguru.com
     port: 443
-    type: trojan
-    password: e3f52fb0-d27f-11ec-8833-1239d0255272
+    type: vmess
+    uuid: a9481600-ef36-402a-a0e5-5547bfd7b87c
+    alterId: 0
+    cipher: auto
+    tls: true
     skip-cert-verify: true
-    sni: idtj-uninet.bonds.id
+    servername: sg-ovh2.v2-ray.com
     network: ws
     ws-opts:
-      path: /howdy
+      path: /fastssh/konqwe/627a57632b590/
       headers:
-        Host: idtj-uninet.bonds.id
+        Host: sg-ovh2.v2-ray.com
     udp: true
-  - name: BUG LINE
-    server: 104.21.71.112
-    port: 443
-    type: trojan
-    password: 5083cde0-d28c-11ec-9672-1239d0255272
+  - name: sg2 80
+    server: ruangguru.com
+    port: 80
+    type: vmess
+    uuid: a9481600-ef36-402a-a0e5-5547bfd7b87c
+    alterId: 0
+    cipher: auto
+    tls: false
     skip-cert-verify: true
-    sni: sg8-trojan.bonds.id
+    servername: sg-ovh2.v2-ray.com
     network: ws
     ws-opts:
-      path: /howdy
+      path: /fastssh/konqwe/627a57632b590/
       headers:
-        Host: sg8-trojan.bonds.id
+        Host: sg-ovh2.v2-ray.com
+    udp: true
+  - name: id1 443
+    server: ruangguru.com
+    port: 443
+    type: vmess
+    uuid: dbcbccc9-75bd-4d10-ae40-f98d5f7fc2c7
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: id3.v2-ray.com
+    network: ws
+    ws-opts:
+      path: /fastssh/qwep/627a57d2968ea/
+      headers:
+        Host: id3.v2-ray.com
+    udp: true
+  - name: id2 80
+    server: ruangguru.com
+    port: 80
+    type: vmess
+    uuid: dbcbccc9-75bd-4d10-ae40-f98d5f7fc2c7
+    alterId: 0
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: id3.v2-ray.com
+    network: ws
+    ws-opts:
+      path: /fastssh/qwep/627a57d2968ea/
+      headers:
+        Host: id3.v2-ray.com
     udp: true
 proxy-groups:
   - name: FASTSSH-SSHKIT-HOWDY
     type: select
     proxies:
-      - BUG GRAB
-      - BUG LINE
-      - BEST-PING
+      - sg1 443
+      - sg2 80
+      - id1 443
+      - id2 80
       - DIRECT
   - name: BEST-PING
     type: url-test
@@ -60,7 +96,9 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - BUG GRAB
-      - BUG LINE
+      - sg1 443
+      - sg2 80
+      - id1 443
+      - id2 80          
 rules:
   - MATCH,FASTSSH-SSHKIT-HOWDY
