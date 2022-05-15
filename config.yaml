@@ -31,7 +31,7 @@ dns:
     - 8.8.8.8
     - 112.215.37.165
 proxies:
-  #vmessgrpc
+ #vmessgrpc
   - name: Aneid-serverssh.net LINE
     server: cdntest40.line-scdn.net
     port: 443
@@ -60,7 +60,7 @@ proxies:
     grpc-opts:
       grpc-service-name: grpc
     udp: true 
-  #vlessgrcp     
+ #vlessgrcp     
   - name: sg1.vless.co LINE
     server: cdntest40.line-scdn.net
     port: 80
@@ -121,7 +121,7 @@ proxies:
       headers:
         Host: sg1.vless.co
     udp: true
-  #trojango  
+ #trojango  
   - name: SG OVH LINE
     server: cdntest40.line-scdn.net
     port: 443
@@ -174,7 +174,7 @@ proxies:
       headers:
         Host: sgovh-trojan.bonds.id
     udp: true
-   #trojangrpc 
+ #trojangrpc 
   - name: sshocean-wsded_Trojan_gRPC LINE
     server: cdntest40.line-scdn.net
     port: 8433
