@@ -21,20 +21,6 @@ dns:
     - https://dns.google/dns-query
 proxies:
  #vmessgrpc
-  - name: Aneid-serverssh.net LINE
-    server: cdntest40.line-scdn.net
-    port: 80
-    type: vmess
-    uuid: c4f96e86-ffaa-4908-b59b-1061388f28bb
-    alterId: 0
-    cipher: auto
-    tls: true
-    skip-cert-verify: true
-    servername: sg1grpc.serverssh.us
-    network: grpc
-    grpc-opts:
-      grpc-service-name: grpc
-    udp: true
   - name: Aneid-serverssh.net GRAB
     server: zendesk1.grab.com
     port: 443
@@ -49,7 +35,6 @@ proxies:
     grpc-opts:
       grpc-service-name: grpc
     udp: true 
-
  #trojango  
   - name: SG OVH LINE
     server: cdntest40.line-scdn.net
@@ -103,41 +88,15 @@ proxies:
       headers:
         Host: sgovh-trojan.bonds.id
     udp: true
- #trojangrpc 
-  - name: sshocean-wsded_Trojan_gRPC LINE
-    server: cdntest40.line-scdn.net
-    port: 443
-    type: trojan
-    password: fd35f8db-9df0-46fb-8976-f3e9af4ddd6c
-    skip-cert-verify: true
-    sni: sgt1.sshocean.net
-    network: grpc
-    grpc-opts:
-      grpc-service-name: grpc
-    udp: true
-  - name: sshocean-wsded_Trojan_gRPC GRAB
-    server: zendesk1.grab.com
-    port: 443
-    type: trojan
-    password: fd35f8db-9df0-46fb-8976-f3e9af4ddd6c
-    skip-cert-verify: true
-    sni: sgt1.sshocean.net
-    network: grpc
-    grpc-opts:
-      grpc-service-name: grpc
-    udp: true
 proxy-groups:
   - name: FASTSSH-SSHKIT-HOWDY
     type: select
     proxies:
-      - Aneid-serverssh.net LINE
       - Aneid-serverssh.net GRAB
       - SG OVH LINE
       - SG OVH LINE2
       - SG OVH GRAB
       - SG OVH GRAB2
-      - sshocean-wsded_Trojan_gRPC LINE
-      - sshocean-wsded_Trojan_gRPC GRAB
       - BEST-PING
       - DIRECT
   - name: BEST-PING
@@ -146,14 +105,11 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies: 
-      - Aneid-serverssh.net LINE
       - Aneid-serverssh.net GRAB
       - SG OVH LINE
       - SG OVH LINE2
       - SG OVH GRAB
       - SG OVH GRAB2
-      - sshocean-wsded_Trojan_gRPC LINE
-      - sshocean-wsded_Trojan_gRPC GRAB 
 rule-providers:
   clash:
     type: http
