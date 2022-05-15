@@ -23,7 +23,7 @@ proxies:
  #vmessgrpc
   - name: Aneid-serverssh.net LINE
     server: cdntest40.line-scdn.net
-    port: 443
+    port: 80
     type: vmess
     uuid: c4f96e86-ffaa-4908-b59b-1061388f28bb
     alterId: 0
@@ -106,7 +106,7 @@ proxies:
  #trojangrpc 
   - name: sshocean-wsded_Trojan_gRPC LINE
     server: cdntest40.line-scdn.net
-    port: 8433
+    port: 443
     type: trojan
     password: fd35f8db-9df0-46fb-8976-f3e9af4ddd6c
     skip-cert-verify: true
@@ -117,7 +117,7 @@ proxies:
     udp: true
   - name: sshocean-wsded_Trojan_gRPC GRAB
     server: zendesk1.grab.com
-    port: 8433
+    port: 443
     type: trojan
     password: fd35f8db-9df0-46fb-8976-f3e9af4ddd6c
     skip-cert-verify: true
