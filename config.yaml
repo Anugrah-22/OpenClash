@@ -1,35 +1,24 @@
 port: 7890
 socks-port: 7891
-redir-port: 7892
-mixed-port: 7893
-tproxy-port: 7895
-ipv6: false
-mode: rule
+mixed-port: 10809
+mode: global
 log-level: silent
 allow-lan: true
 external-controller: 0.0.0.0:9090
-secret: ""
+secret : ""
 bind-address: "*"
-unified-delay: true
-profile:
-  store-selected: true
+external-ui: yacd-gh-pages
 dns:
   enable: true
   ipv6: false
   enhanced-mode: redir-host
-  listen: 0.0.0.0:7874
+  listen: 127.0.0.1:7894
+  use-hosts: true
   nameserver:
-    - 1.1.1.1
-    - 8.8.8.8
-  fallback:
-    - 1.0.0.1
     - https://cloudflare-dns.com/dns-query
-    - https://dns.google/dns-query
-    - 112.215.37.165
-  default-nameserver:
     - 1.1.1.1
-    - 8.8.8.8
-    - 112.215.37.165
+  fallback:
+    - https://dns.google/dns-query
 proxies:
  #vmessgrpc
   - name: Aneid-serverssh.net LINE
@@ -232,6 +221,13 @@ proxy-groups:
       - SG OVH GRAB
       - SG OVH GRAB2
       - sshocean-wsded_Trojan_gRPC LINE
-      - sshocean-wsded_Trojan_gRPC GRAB         
+      - sshocean-wsded_Trojan_gRPC GRAB 
+rule-providers:
+  clash:
+    type: http
+    behavior: domain
+    url: https://howdy.id/download/rules/clash.txt
+    path: ./providers/rule-provider_clash.yaml
+    interval: 86400        
 rules:
   - MATCH,FASTSSH-SSHKIT-HOWDY
