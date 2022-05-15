@@ -2,65 +2,236 @@ port: 7890
 socks-port: 7891
 redir-port: 7892
 mixed-port: 7893
+tproxy-port: 7895
+ipv6: false
 mode: rule
 log-level: silent
 allow-lan: true
 external-controller: 0.0.0.0:9090
+secret: ""
 bind-address: "*"
-ipv6: false
+unified-delay: true
+profile:
+  store-selected: true
 dns:
   enable: true
   ipv6: false
   enhanced-mode: redir-host
-  listen: 0.0.0.0:7894
-  fallback-filter:
-    geoip: false
-    ipcidr:
-    - 240.0.0.0/4
+  listen: 0.0.0.0:7874
   nameserver:
-    - https://cloudflare-dns.com/dns-query
-    - https://dns.google/dns-query
-    - tls://1.1.1.1:853
-    - tls://8.8.8.8:853
-  fallback:
-    - tcp://1.1.1.1
-    - tcp://8.8.8.8
     - 1.1.1.1
     - 8.8.8.8
-tun:
-  enable: true
-  stack: system 
-  macOS-auto-route: true
-  macOS-auto-detect-interface: true
-  dns-hijack:
-    - tcp://8.8.8.8:53
-experimental:
-  interface-name: en0
-
+  fallback:
+    - 1.0.0.1
+    - https://cloudflare-dns.com/dns-query
+    - https://dns.google/dns-query
+    - 112.215.37.165
+  default-nameserver:
+    - 1.1.1.1
+    - 8.8.8.8
+    - 112.215.37.165
 proxies:
-  - {name: SG Trojan OVH Line, server: sgovh-trojan.bonds.id, port: 443, udp: true, type: trojan, password: 8a619070-d335-11ec-b03f-1239d0255272, sni: cdntest40.line-scdn.net, skip-cert-verify: true}
-  - {name: ID Rackh Trojan Line, server: id-rackhtj.bonds.id, port: 443, udp: true, type: trojan, password: dcfac860-d335-11ec-b328-1239d0255272, sni: cdntest40.line-scdn.net, skip-cert-verify: true}
-  - {name: w11-trojan.bonds.id Line, server: w11-trojan.bonds.id, port: 443, udp: true, type: trojan, password: 2b1edb00-d336-11ec-8a02-1239d0255272, sni: cdntest40.line-scdn.net, skip-cert-verify: true}
-  - {name: w12-trojan.bonds.id Grab, server: w12-trojan.bonds.id, port: 443, udp: true, type: trojan, password: 6e773230-d336-11ec-b685-1239d0255272, sni: zendesk1.grab.com, skip-cert-verify: true}
-  - {name: w11-trojan.bonds.id Line90, server: w11-trojan.bonds.id, port: 443, udp: true, type: trojan, password: 9a5e3cf0-d336-11ec-80eb-1239d0255272, sni: cdntest40.line-scdn.net, skip-cert-verify: true}
-  - {name: w13-trojan.bonds.id grab, server: w13-trojan.bonds.id, port: 443, udp: true, type: trojan, password: d5a931a0-d336-11ec-8c98-1239d0255272, sni: zendesk1.grab.com.net, skip-cert-verify: true}
-
+  #vmessgrpc
+  - name: Aneid-serverssh.net LINE
+    server: cdntest40.line-scdn.net
+    port: 443
+    type: vmess
+    uuid: c4f96e86-ffaa-4908-b59b-1061388f28bb
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sg1grpc.serverssh.us
+    network: grpc
+    grpc-opts:
+      grpc-service-name: grpc
+    udp: true
+  - name: Aneid-serverssh.net GRAB
+    server: zendesk1.grab.com
+    port: 443
+    type: vmess
+    uuid: c4f96e86-ffaa-4908-b59b-1061388f28bb
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sg1grpc.serverssh.us
+    network: grpc
+    grpc-opts:
+      grpc-service-name: grpc
+    udp: true 
+  #vlessgrcp     
+  - name: sg1.vless.co LINE
+    server: cdntest40.line-scdn.net
+    port: 80
+    type: vless
+    uuid: 81f1f510-3ca7-4734-8956-0f4fce670af5
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: sg1.vless.co
+    network: ws
+    ws-opts:
+      path: /fastssh/taqimeww/628061bc527fd/
+      headers:
+        Host: sg1.vless.co
+    udp: true
+  - name: sg1.vless.co LINE2 
+    server: cdntest40.line-scdn.net
+    port: 443
+    type: vless
+    uuid: 81f1f510-3ca7-4734-8956-0f4fce670af5
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sg1.vless.co
+    network: ws
+    ws-opts:
+      path: /fastssh/taqimeww/628061bc527fd/
+      headers:
+        Host: sg1.vless.co
+    udp: true
+  - name: sg1.vless.co GRAB
+    server: zendesk1.grab.com
+    port: 80
+    type: vless
+    uuid: 81f1f510-3ca7-4734-8956-0f4fce670af5
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: sg1.vless.co
+    network: ws
+    ws-opts:
+      path: /fastssh/taqimeww/628061bc527fd/
+      headers:
+        Host: sg1.vless.co
+    udp: true
+  - name: sg1.vless.co GRAB2
+    server: zendesk1.grab.com
+    port: 443
+    type: vless
+    uuid: 81f1f510-3ca7-4734-8956-0f4fce670af5
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: sg1.vless.co
+    network: ws
+    ws-opts:
+      path: /fastssh/taqimeww/628061bc527fd/
+      headers:
+        Host: sg1.vless.co
+    udp: true
+  #trojango  
+  - name: SG OVH LINE
+    server: cdntest40.line-scdn.net
+    port: 443
+    type: trojan
+    password: 97aa3c80-d3f5-11ec-a91e-1239d0255272
+    skip-cert-verify: true
+    sni: sgovh-trojan.bonds.id
+    network: ws
+    ws-opts:
+      path: /howdy
+      headers:
+        Host: sgovh-trojan.bonds.id
+    udp: true
+  - name: SG OVH LINE2
+    server: cdntest40.line-scdn.net
+    port: 443
+    type: trojan
+    password: 97aa3c80-d3f5-11ec-a91e-1239d0255272
+    skip-cert-verify: true
+    sni: sgovh-trojan.bonds.id
+    network: ws
+    ws-opts:
+      path: /howdy
+      headers:
+        Host: sgovh-trojan.bonds.id
+    udp: true
+  - name: SG OVH GRAB
+    server: zendesk1.grab.com
+    port: 443
+    type: trojan
+    password: 97aa3c80-d3f5-11ec-a91e-1239d0255272
+    skip-cert-verify: true
+    sni: sgovh-trojan.bonds.id
+    network: ws
+    ws-opts:
+      path: /howdy
+      headers:
+        Host: sgovh-trojan.bonds.id
+    udp: true
+  - name: SG OVH GRAB2
+    server: zendesk1.grab.com
+    port: 443
+    type: trojan
+    password: 97aa3c80-d3f5-11ec-a91e-1239d0255272
+    skip-cert-verify: true
+    sni: sgovh-trojan.bonds.id
+    network: ws
+    ws-opts:
+      path: /howdy
+      headers:
+        Host: sgovh-trojan.bonds.id
+    udp: true
+   #trojangrpc 
+  - name: sshocean-wsded_Trojan_gRPC LINE
+    server: cdntest40.line-scdn.net
+    port: 8433
+    type: trojan
+    password: fd35f8db-9df0-46fb-8976-f3e9af4ddd6c
+    skip-cert-verify: true
+    sni: sgt1.sshocean.net
+    network: grpc
+    grpc-opts:
+      grpc-service-name: grpc
+    udp: true
+  - name: sshocean-wsded_Trojan_gRPC GRAB
+    server: zendesk1.grab.com
+    port: 8433
+    type: trojan
+    password: fd35f8db-9df0-46fb-8976-f3e9af4ddd6c
+    skip-cert-verify: true
+    sni: sgt1.sshocean.net
+    network: grpc
+    grpc-opts:
+      grpc-service-name: grpc
+    udp: true
 proxy-groups:
-  - name: howdy-trojan
+  - name: FASTSSH-SSHKIT-HOWDY
     type: select
     proxies:
-      - SG Trojan OVH Line
-      - ID Rackh Trojan Line
-      - w11-trojan.bonds.id Line
-      - w12-trojan.bonds.id Grab
-      - w11-trojan.bonds.id Line90
-      - w13-trojan.bonds.id grab
-rule-providers:
-  clash:
-    type: http
-    behavior: domain
-    url: https://howdy.id/download/rules/clash.txt
-    path: ./providers/rule-provider_clash.yaml
-    interval: 86400
+      - Aneid-serverssh.net LINE
+      - Aneid-serverssh.net GRAB
+      - sg1.vless.co LINE
+      - sg1.vless.co LINE2
+      - sg1.vless.co GRAB
+      - sg1.vless.co GRAB2
+      - SG OVH LINE
+      - SG OVH LINE2
+      - SG OVH GRAB
+      - SG OVH GRAB2
+      - sshocean-wsded_Trojan_gRPC LINE
+      - sshocean-wsded_Trojan_gRPC GRAB
+      - BEST-PING
+      - DIRECT
+  - name: BEST-PING
+    type: url-test
+    url: http://hi.bonds.id/ping
+    interval: 300
+    tolerance: 50
+    proxies: 
+      - Aneid-serverssh.net LINE
+      - Aneid-serverssh.net GRAB
+      - sg1.vless.co LINE
+      - sg1.vless.co LINE2
+      - sg1.vless.co GRAB
+      - sg1.vless.co GRAB2
+      - SG OVH LINE
+      - SG OVH LINE2
+      - SG OVH GRAB
+      - SG OVH GRAB2
+      - sshocean-wsded_Trojan_gRPC LINE
+      - sshocean-wsded_Trojan_gRPC GRAB         
 rules:
- - MATCH,howdy-trojan
+  - MATCH,FASTSSH-SSHKIT-HOWDY
